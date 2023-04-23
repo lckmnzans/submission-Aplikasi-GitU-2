@@ -11,6 +11,7 @@ import com.dicoding.gitu.R
 import com.dicoding.gitu.user.User
 
 class UserFollowsAdapter(private val listFollows: ArrayList<User>) : RecyclerView.Adapter<UserFollowsAdapter.ViewHolder>() {
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgPhoto: ImageView = itemView.findViewById(R.id.img_user_photo)
         val tvUsername: TextView = itemView.findViewById(R.id.tv_user_username)
