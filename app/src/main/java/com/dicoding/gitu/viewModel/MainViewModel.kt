@@ -21,12 +21,12 @@ class MainViewModel: ViewModel() {
 
     companion object {
         private const val TAG = "MainViewModel"
-        var QUERY = "fadhil"
+        private const val QUERY = "a"
     }
 
-    private fun findUser() {
+    private fun findUser(q: String = QUERY) {
         _isLoading.value = true
-        val client = ApiConfig.getApiService().getUser(QUERY)
+        val client = ApiConfig.getApiService().getUser(q)
         client.enqueue(object: Callback<GithubResponse> {
             override fun onResponse(
                 call: Call<GithubResponse>,
@@ -50,8 +50,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun updateQuery(query: String) {
-        QUERY = query
-        findUser()
+        findUser(query)
     }
 
     init {

@@ -6,6 +6,7 @@
     tools:context=".DetailActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -17,16 +18,18 @@
         app:layout_constraintStart_toStartOf="@id/img_user_profile"
         app:layout_constraintEnd_toEndOf="@id/img_user_profile"
         tools:visibility="visible"/>
+
     <ImageView
         android:id="@+id/img_user_profile"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/user_avatar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@tools:sample/avatars"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck"
+        tools:src="@tools:sample/avatars" />
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="match_parent"
@@ -101,8 +104,11 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
+            android:contentDescription="@string/content_tab"
+            app:tabIndicatorColor="@color/purple_200"
+            app:tabIndicatorHeight="5dp"
             app:tabTextColor="@android:color/white" />
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

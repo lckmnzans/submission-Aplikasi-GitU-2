@@ -20,6 +20,7 @@ class DetailActivity : AppCompatActivity() {
     private val viewModel: DetailViewModel by lazy {
         ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
     }
+
     companion object {
         const val EXTRA_USER = "extra_user"
         var EXTRA_USERNAME = "extra_username"
@@ -36,15 +37,9 @@ class DetailActivity : AppCompatActivity() {
         activityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(activityDetailBinding.root)
 
-        val user = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(EXTRA_USER, User::class.java)
-        } else {
-            @Suppress("DEPRECATED")
-            intent.getParcelableExtra(EXTRA_USER)
-        }
-
         supportActionBar!!.hide()
 
+        val user = getUserDetail()
         if (user != null) {
             EXTRA_USERNAME = user.username
             DetailViewModel.USERNAME = user.username
@@ -72,18 +67,23 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setUserDetail(user: UserDetailResponse) {
-        val name = user.name
-        val uname = user.login
-        val followers = user.followers
-        val following = user.following
         Glide.with(this@DetailActivity).load(user.avatarUrl).into(activityDetailBinding.imgUserProfile)
-        if (name != null) {
-            activityDetailBinding.tvUserName.text = name.toString()
+        if (user.name != null) {
+            activityDetailBinding.tvUserName.text = user.name.toString()
         } else {
-            activityDetailBinding.tvUserName.text = uname.toString()
+            activityDetailBinding.tvUserName.text = user.login.toString()
         }
-        activityDetailBinding.tvUserUsername.text = uname.toString()
-        activityDetailBinding.tvFollowersCount.text = followers.toString()
-        activityDetailBinding.tvFollowingCount.text = following.toString()
+        activityDetailBinding.tvUserUsername.text = user.login.toString()
+        activityDetailBinding.tvFollowersCount.text = user.followers.toString()
+        activityDetailBinding.tvFollowingCount.text = user.following.toString()
+    }
+
+    private fun getUserDetail(): User? {
+        if (Build.VERSION.SDK_INT >= 33) {
+            return intent.getParcelableExtra(EXTRA_USER, User::class.java)
+        } else {
+            @Suppress("DEPRECATED")
+            return intent.getParcelableExtra(EXTRA_USER)
+        }
     }
 }

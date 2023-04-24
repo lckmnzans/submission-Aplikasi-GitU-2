@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                 val userDetail = User(data.photo, data.username)
                 val toDetail = Intent(this@MainActivity, DetailActivity::class.java)
                 toDetail.putExtra(DetailActivity.EXTRA_USER, userDetail)
+                toDetail.putExtra(DetailActivity.EXTRA_USERNAME, data.username)
                 startActivity(toDetail)
             }
         })
