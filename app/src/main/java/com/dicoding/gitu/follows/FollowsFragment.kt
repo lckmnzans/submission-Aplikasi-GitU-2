@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.gitu.DetailActivity
-import com.dicoding.gitu.Items
+import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.api.ApiConfig
 import com.dicoding.gitu.databinding.FragmentFollowsBinding
 import com.dicoding.gitu.user.User

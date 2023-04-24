@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dicoding.gitu.Items
-import com.dicoding.gitu.UserDetailResponse
+import com.dicoding.gitu.response.Items
+import com.dicoding.gitu.response.UserDetailResponse
 import com.dicoding.gitu.api.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback

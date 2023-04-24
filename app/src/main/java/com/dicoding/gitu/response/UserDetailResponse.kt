@@ -1,4 +1,4 @@
-package com.dicoding.gitu
+package com.dicoding.gitu.response
 
 import com.google.gson.annotations.SerializedName
 

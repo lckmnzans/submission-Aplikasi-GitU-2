@@ -12,6 +12,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.gitu.databinding.ActivityMainBinding
+import com.dicoding.gitu.menu.SettingActivity
+import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.user.User
 import com.dicoding.gitu.user.UserAdapter
 import com.dicoding.gitu.viewModel.MainViewModel
@@ -52,13 +54,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.option_search, menu)
+        inflater.inflate(R.menu.option_menu, menu)
 
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            R.id.menu_favorite -> {
+                TODO("pindah aktivitas favorit")
+                return true
+            }
+            R.id.menu_setting -> {
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            else -> return true
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {

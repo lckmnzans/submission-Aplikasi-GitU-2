@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.dicoding.gitu.databinding.ActivityDetailBinding
 import com.dicoding.gitu.follows.SectionsPageAdapter
+import com.dicoding.gitu.response.UserDetailResponse
 import com.dicoding.gitu.user.User
 import com.dicoding.gitu.viewModel.DetailViewModel
 import com.google.android.material.tabs.TabLayout

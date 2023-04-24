@@ -1,8 +1,8 @@
 package com.dicoding.gitu.api
 
-import com.dicoding.gitu.UserDetailResponse
-import com.dicoding.gitu.GithubResponse
-import com.dicoding.gitu.Items
+import com.dicoding.gitu.response.UserDetailResponse
+import com.dicoding.gitu.response.GithubResponse
+import com.dicoding.gitu.response.Items
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -14,5 +14,7 @@
     <string name="content_tab">This is Tab %1$d</string>
     <string name="tab_1">Followers</string>
     <string name="tab_2">Following</string>
+
     <string name="fab_addfavs">Add to favorite</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>
