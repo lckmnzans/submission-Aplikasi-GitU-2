@@ -6,13 +6,24 @@
     android:layout_height="match_parent"
     android:id="@+id/main_view"
     tools:context=".MainActivity">
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_field"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:inputType="text"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_field"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <ProgressBar
         android:id="@+id/progressBar"
