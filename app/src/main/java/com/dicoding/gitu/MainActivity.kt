@@ -8,16 +8,24 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.gitu.databinding.ActivityMainBinding
+import com.dicoding.gitu.helper.SettingPreference
+import com.dicoding.gitu.helper.ViewModelFactory
 import com.dicoding.gitu.menu.SettingActivity
 import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.user.User
 import com.dicoding.gitu.user.UserAdapter
 import com.dicoding.gitu.viewModel.MainViewModel
+import com.dicoding.gitu.viewModel.SettingViewModel
 
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
     private val viewModel: MainViewModel by lazy {
@@ -30,6 +38,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(activityMainBinding.root)
 
         supportActionBar?.title = "Github User"
+
+        val pref = SettingPreference.getInstance(dataStore)
+        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(SettingViewModel::class.java)
+        settingViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
         activityMainBinding.rvUsers.layoutManager = LinearLayoutManager(this)
         viewModel.listUser.observe(this, { items -> setUserData(items) })
