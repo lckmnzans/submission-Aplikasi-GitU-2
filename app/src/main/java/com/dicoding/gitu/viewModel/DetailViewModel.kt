@@ -23,7 +23,7 @@ class DetailViewModel: ViewModel() {
 
     companion object {
         private const val TAG = "DetailActivity"
-        var USERNAME = "username"
+        var username = "username"
     }
 
     private fun getUserDetail(username: String) {
@@ -70,6 +70,6 @@ class DetailViewModel: ViewModel() {
     }
 
     init {
-        getUserDetail(USERNAME)
+        getUserDetail(username)
     }
 }

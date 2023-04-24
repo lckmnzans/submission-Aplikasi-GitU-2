@@ -17,13 +17,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var activityDetailBinding: ActivityDetailBinding
+    private lateinit var sectionsPageAdapter: SectionsPageAdapter
     private val viewModel: DetailViewModel by lazy {
         ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
     }
 
     companion object {
         const val EXTRA_USER = "extra_user"
-        var EXTRA_USERNAME = "extra_username"
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
@@ -41,13 +41,12 @@ class DetailActivity : AppCompatActivity() {
 
         val user = getUserDetail()
         if (user != null) {
-            EXTRA_USERNAME = user.username
-            DetailViewModel.USERNAME = user.username
+            sectionsPageAdapter = SectionsPageAdapter(this, user.username)
+            DetailViewModel.username = user.username
             viewModel.userDetail.observe(this, { userDetail -> setUserDetail(userDetail)})
             viewModel.isLoading.observe(this, { showLoading(it) })
         }
 
-        val sectionsPageAdapter = SectionsPageAdapter(this)
         val viewPager: ViewPager2 = activityDetailBinding.viewPager
         viewPager.adapter = sectionsPageAdapter
         val tabs: TabLayout = activityDetailBinding.tabs
