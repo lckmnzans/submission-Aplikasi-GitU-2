@@ -17,13 +17,10 @@ interface ApiService {
         @Path("username") username: String
     ): Call<UserDetailResponse>
 
-    @GET("users/{username}/followers")
-    fun getFollowers(
-        @Path("username") username: String
-    ): Call<List<Items>>
-
-    @GET("users/{username}/following")
-    fun getFollowing(
-        @Path("username") username: String
+    @GET("users/{username}/{type}")
+    @Headers("Authorization: token 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")
+    fun getListOfFollows(
+        @Path("username") username: String,
+        @Path("type") type: String
     ): Call<List<Items>>
 }

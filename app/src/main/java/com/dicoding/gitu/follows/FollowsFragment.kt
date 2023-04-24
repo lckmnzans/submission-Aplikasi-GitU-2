@@ -34,10 +34,10 @@ class FollowsFragment : Fragment() {
 
         binding.rvFollowsList.layoutManager = LinearLayoutManager(requireContext())
         if (position == 1) {
-            viewModel.getUserFollowsDetail(ApiConfig.getApiService().getFollowers(username))
+            viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(username, "followers"))
             viewModel.isLoading.observe(viewLifecycleOwner, { showLoading(it) })
         } else {
-            viewModel.getUserFollowsDetail(ApiConfig.getApiService().getFollowing(username))
+            viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(username, "following"))
             viewModel.isLoading.observe(viewLifecycleOwner, { showLoading(it) })
         }
         viewModel.userFollowsList.observe(viewLifecycleOwner) { users -> setUsers(users) }
