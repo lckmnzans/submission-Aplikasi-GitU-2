@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
@@ -67,7 +68,11 @@ class DetailActivity : AppCompatActivity() {
             userFav.let { userFavorite ->
                 userFavorite.avatarUrl = user!!.photo
                 userFavorite.username = user.username
+                userFavorite.isFavorite = true
                 roomViewModel.insert(userFav)
+
+                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite)
+                Toast.makeText(this, "Berhasil ditambahkan ke daftar favorit", Toast.LENGTH_SHORT).show()
             }
         }
         supportActionBar?.elevation = 0f

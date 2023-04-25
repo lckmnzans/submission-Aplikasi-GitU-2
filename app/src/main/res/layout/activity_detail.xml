@@ -120,13 +120,12 @@
         android:id="@+id/fab_add_to_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/fab_addfavs"
+        android:src="@drawable/ic_favorite_bordered"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_favorite_bordered" />
+        app:layout_constraintEnd_toEndOf="parent" />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"

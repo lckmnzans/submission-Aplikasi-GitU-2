@@ -15,4 +15,5 @@ data class UserFav (
     @PrimaryKey(autoGenerate = false)
     var username: String = "",
     var avatarUrl: String? = null,
+    var isFavorite: Boolean = true,
 ): Parcelable
