@@ -20,7 +20,7 @@ class FollowsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by lazy {
-        ViewModelProvider(this).get(DetailViewModel::class.java)
+        ViewModelProvider(this)[DetailViewModel::class.java]
     }
 
     companion object {
@@ -35,10 +35,10 @@ class FollowsFragment : Fragment() {
         binding.rvFollowsList.layoutManager = LinearLayoutManager(requireContext())
         if (position == 1) {
             viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(username, "followers"))
-            viewModel.isLoading.observe(viewLifecycleOwner, { showLoading(it) })
+            viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         } else {
             viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(username, "following"))
-            viewModel.isLoading.observe(viewLifecycleOwner, { showLoading(it) })
+            viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         }
         viewModel.userFollowsList.observe(viewLifecycleOwner) { users -> setUsers(users) }
     }

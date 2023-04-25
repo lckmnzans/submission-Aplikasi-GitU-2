@@ -7,8 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -27,9 +25,9 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var activityDetailBinding: ActivityDetailBinding
     private lateinit var sectionsPageAdapter: SectionsPageAdapter
     private val detailViewModel: DetailViewModel by lazy {
-        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
+        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
     }
-    private val roomViewModel by viewModels<FavoriteViewModel>() {
+    private val roomViewModel by viewModels<FavoriteViewModel> {
         RoomViewModelFactory.getInstance(application)
     }
 
@@ -56,8 +54,14 @@ class DetailActivity : AppCompatActivity() {
         if (user != null) {
             sectionsPageAdapter = SectionsPageAdapter(this, user.username)
             DetailViewModel.username = user.username
-            detailViewModel.userDetail.observe(this, { userDetail -> setUserDetail(userDetail)})
-            detailViewModel.isLoading.observe(this, { showLoading(it) })
+            detailViewModel.userDetail.observe(this) { userDetail -> setUserDetail(userDetail) }
+            detailViewModel.isLoading.observe(this) { showLoading(it) }
+            val userFav = roomViewModel.getByUsername(user.username)
+            userFav.observe(this) { auser ->
+                if ( auser != null ) {
+                    activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite)
+                }
+            }
         }
 
         val viewPager: ViewPager2 = activityDetailBinding.viewPager
@@ -100,7 +104,6 @@ class DetailActivity : AppCompatActivity() {
         activityDetailBinding.tvUserUsername.text = user.login.toString()
         activityDetailBinding.tvFollowersCount.text = user.followers.toString()
         activityDetailBinding.tvFollowingCount.text = user.following.toString()
-
     }
 
     private fun getUserDetail(): User? {

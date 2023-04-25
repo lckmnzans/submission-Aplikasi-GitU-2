@@ -15,7 +15,7 @@ import com.dicoding.gitu.viewModel.FavoriteViewModel
 
 class FavoriteActivity : AppCompatActivity() {
     private var _activityFavoriteBinding: ActivityFavoriteBinding? = null
-    private val roomViewModel by viewModels<FavoriteViewModel>() {
+    private val roomViewModel by viewModels<FavoriteViewModel> {
         RoomViewModelFactory.getInstance(application)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
