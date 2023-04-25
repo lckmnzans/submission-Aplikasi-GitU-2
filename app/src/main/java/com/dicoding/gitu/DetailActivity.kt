@@ -100,14 +100,7 @@ class DetailActivity : AppCompatActivity() {
         activityDetailBinding.tvUserUsername.text = user.login.toString()
         activityDetailBinding.tvFollowersCount.text = user.followers.toString()
         activityDetailBinding.tvFollowingCount.text = user.following.toString()
-        val userdata = roomViewModel.getByUsername(user.login.toString())
-        userdata.observe(this, { userFav ->
-            if (userFav.isFavorite) {
-                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite)
-            } else {
-                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite_bordered)
-            }
-        })
+
     }
 
     private fun getUserDetail(): User? {

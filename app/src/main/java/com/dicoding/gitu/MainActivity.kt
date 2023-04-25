@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.gitu.databinding.ActivityMainBinding
 import com.dicoding.gitu.helper.SettingPreference
 import com.dicoding.gitu.helper.SettingViewModelFactory
+import com.dicoding.gitu.menu.FavoriteActivity
 import com.dicoding.gitu.menu.SettingActivity
 import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.user.User
@@ -80,7 +81,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_favorite -> {
-                TODO("pindah aktivitas favorit")
+                val intent = Intent(this, FavoriteActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.menu_setting -> {
