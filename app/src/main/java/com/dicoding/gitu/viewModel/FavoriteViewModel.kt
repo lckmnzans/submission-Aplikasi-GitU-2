@@ -11,6 +11,8 @@ class FavoriteViewModel(application: Application): ViewModel() {
 
     fun getAll(): LiveData<List<UserFav>> = mUserFavRepository.getAll()
 
+    fun getByUsername(username: String): LiveData<UserFav> = mUserFavRepository.getByUsername(username)
+
     fun insert(user: UserFav) {
         mUserFavRepository.insert(user)
     }

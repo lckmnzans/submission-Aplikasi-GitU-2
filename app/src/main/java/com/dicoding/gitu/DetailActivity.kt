@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -33,6 +35,8 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_USER = "extra_user"
+        const val ALERT_DIALOG_CLOSE = 10
+        const val ALERT_DIALOG_DELETE = 20
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
@@ -96,6 +100,14 @@ class DetailActivity : AppCompatActivity() {
         activityDetailBinding.tvUserUsername.text = user.login.toString()
         activityDetailBinding.tvFollowersCount.text = user.followers.toString()
         activityDetailBinding.tvFollowingCount.text = user.following.toString()
+        val userdata = roomViewModel.getByUsername(user.login.toString())
+        userdata.observe(this, { userFav ->
+            if (userFav.isFavorite) {
+                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite)
+            } else {
+                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite_bordered)
+            }
+        })
     }
 
     private fun getUserDetail(): User? {

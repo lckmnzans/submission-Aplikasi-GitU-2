@@ -25,4 +25,7 @@ interface UserFavDao {
 
     @Query("SELECT * FROM UserFav ORDER BY username ASC")
     fun getAll(): LiveData<List<UserFav>>
+
+    @Query("SELECT * FROM UserFav WHERE username=:username")
+    fun getByUsername(username: String): LiveData<UserFav>
 }

@@ -17,4 +17,10 @@
 
     <string name="fab_addfavs">Add to favorite</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="cancel">Batalkan</string>
+    <string name="message_cancel">Anda akan menghapus dari daftar favorit</string>
+    <string name="message_delete">Anda sudah menghapus dari daftar favorit</string>
+    <string name="delete">Hapus</string>
+    <string name="yes">Ya</string>
+    <string name="no">No</string>
 </resources>

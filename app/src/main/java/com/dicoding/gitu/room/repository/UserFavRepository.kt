@@ -22,6 +22,8 @@ class UserFavRepository(application: Application) {
 
     fun getAll(): LiveData<List<UserFav>> = mUserFavDao.getAll()
 
+    fun getByUsername(username: String): LiveData<UserFav> = mUserFavDao.getByUsername(username)
+
     fun insert(user: UserFav) {
         executorService.execute { mUserFavDao.insert(user) }
     }
