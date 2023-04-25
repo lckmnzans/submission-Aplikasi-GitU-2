@@ -13,6 +13,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UserFav (
     @PrimaryKey(autoGenerate = false)
-    var avatarUrl: String? = null,
     var username: String = "",
+    var avatarUrl: String? = null,
 ): Parcelable

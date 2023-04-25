@@ -4,23 +4,30 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.dicoding.gitu.databinding.ActivityDetailBinding
 import com.dicoding.gitu.follows.SectionsPageAdapter
+import com.dicoding.gitu.helper.RoomViewModelFactory
 import com.dicoding.gitu.response.UserDetailResponse
+import com.dicoding.gitu.room.database.UserFav
 import com.dicoding.gitu.user.User
 import com.dicoding.gitu.viewModel.DetailViewModel
+import com.dicoding.gitu.viewModel.FavoriteViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var activityDetailBinding: ActivityDetailBinding
     private lateinit var sectionsPageAdapter: SectionsPageAdapter
-    private val viewModel: DetailViewModel by lazy {
+    private val detailViewModel: DetailViewModel by lazy {
         ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(DetailViewModel::class.java)
+    }
+    private val roomViewModel by viewModels<FavoriteViewModel>() {
+        RoomViewModelFactory.getInstance(application)
     }
 
     companion object {
@@ -44,8 +51,8 @@ class DetailActivity : AppCompatActivity() {
         if (user != null) {
             sectionsPageAdapter = SectionsPageAdapter(this, user.username)
             DetailViewModel.username = user.username
-            viewModel.userDetail.observe(this, { userDetail -> setUserDetail(userDetail)})
-            viewModel.isLoading.observe(this, { showLoading(it) })
+            detailViewModel.userDetail.observe(this, { userDetail -> setUserDetail(userDetail)})
+            detailViewModel.isLoading.observe(this, { showLoading(it) })
         }
 
         val viewPager: ViewPager2 = activityDetailBinding.viewPager
@@ -55,6 +62,14 @@ class DetailActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
+        activityDetailBinding.fabAddToFav.setOnClickListener {
+            val userFav = UserFav()
+            userFav.let { userFavorite ->
+                userFavorite.avatarUrl = user!!.photo
+                userFavorite.username = user.username
+                roomViewModel.insert(userFav)
+            }
+        }
         supportActionBar?.elevation = 0f
     }
 

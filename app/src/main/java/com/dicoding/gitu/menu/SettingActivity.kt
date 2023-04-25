@@ -11,7 +11,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.gitu.databinding.ActivitySettingBinding
 import com.dicoding.gitu.helper.SettingPreference
-import com.dicoding.gitu.helper.SViewModelFactory
+import com.dicoding.gitu.helper.SettingViewModelFactory
 import com.dicoding.gitu.viewModel.SettingViewModel
 
 /*
@@ -33,7 +33,7 @@ class SettingActivity : AppCompatActivity() {
         val switchTheme = binding.switchTheme
 
         val pref = SettingPreference.getInstance(dataStore)
-        val settingViewModel = ViewModelProvider(this, SViewModelFactory(pref)).get(SettingViewModel::class.java)
+        val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(SettingViewModel::class.java)
         settingViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

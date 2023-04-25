@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.gitu.viewModel.SettingViewModel
 
-class SViewModelFactory(private val pref: SettingPreference): ViewModelProvider.NewInstanceFactory() {
+class SettingViewModelFactory(private val pref: SettingPreference): ViewModelProvider.NewInstanceFactory() {
     /*
     * Kelas ini bertanggung jawab utk membuat instance dari kelas ViewModel
     * metode create() akan otomatis terpanggil ketika memulai inisialisasi utk membuat instance ViewModel

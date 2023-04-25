@@ -3,21 +3,20 @@ package com.dicoding.gitu.helper
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.gitu.viewModel.DetailViewModel
 import com.dicoding.gitu.viewModel.FavoriteViewModel
 
-class RViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
+class RoomViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
     companion object {
         @Volatile
-        private var INSTANCE: RViewModelFactory? = null
+        private var INSTANCE: RoomViewModelFactory? = null
         @JvmStatic
-        fun getInstance(application: Application): RViewModelFactory {
+        fun getInstance(application: Application): RoomViewModelFactory {
             if (INSTANCE == null) {
-                synchronized(RViewModelFactory::class.java) {
-                    INSTANCE = RViewModelFactory(application)
+                synchronized(RoomViewModelFactory::class.java) {
+                    INSTANCE = RoomViewModelFactory(application)
                 }
             }
-            return INSTANCE as RViewModelFactory
+            return INSTANCE as RoomViewModelFactory
         }
     }
 
