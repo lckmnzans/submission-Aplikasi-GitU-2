@@ -107,7 +107,6 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:contentDescription="@string/content_tab"
-            app:tabIndicatorColor="@color/purple_200"
             app:tabIndicatorHeight="5dp"
             app:tabTextColor="@android:color/white" />
         <androidx.viewpager2.widget.ViewPager2
@@ -123,7 +122,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/fab_addfavs"
-        android:src="@drawable/ic_favorite_bordered"
+        tools:src="@drawable/ic_favorite_bordered"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
     <androidx.constraintlayout.widget.Guideline

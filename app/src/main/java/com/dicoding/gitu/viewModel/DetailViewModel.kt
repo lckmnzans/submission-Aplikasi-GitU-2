@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.response.UserDetailResponse
 import com.dicoding.gitu.api.ApiConfig
+import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

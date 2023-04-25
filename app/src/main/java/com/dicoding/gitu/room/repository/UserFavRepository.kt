@@ -8,9 +8,6 @@ import com.dicoding.gitu.room.database.UserFavRoomDatabase
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-/*
-* Kelas ini
-* */
 class UserFavRepository(application: Application) {
     private val mUserFavDao: UserFavDao
     private val executorService: ExecutorService = Executors.newSingleThreadExecutor()

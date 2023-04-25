@@ -24,6 +24,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 class DetailActivity : AppCompatActivity() {
     private lateinit var activityDetailBinding: ActivityDetailBinding
     private lateinit var sectionsPageAdapter: SectionsPageAdapter
+    private lateinit var username: String
+    private lateinit var avatarUrl: String
+
     private val detailViewModel: DetailViewModel by lazy {
         ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailViewModel::class.java]
     }
@@ -33,8 +36,6 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_USER = "extra_user"
-        const val ALERT_DIALOG_CLOSE = 10
-        const val ALERT_DIALOG_DELETE = 20
 
         @StringRes
         private val TAB_TITLES = intArrayOf(
@@ -50,16 +51,30 @@ class DetailActivity : AppCompatActivity() {
 
         supportActionBar!!.hide()
 
-        val user = getUserDetail()
+        val user = getParceableData()
         if (user != null) {
+            username = user.username
+            avatarUrl = user.photo
             sectionsPageAdapter = SectionsPageAdapter(this, user.username)
             DetailViewModel.username = user.username
             detailViewModel.userDetail.observe(this) { userDetail -> setUserDetail(userDetail) }
             detailViewModel.isLoading.observe(this) { showLoading(it) }
-            val userFav = roomViewModel.getByUsername(user.username)
-            userFav.observe(this) { auser ->
-                if ( auser != null ) {
+        }
+        roomViewModel.getByUsername(username).observe(this) { a_user ->
+            if ( a_user != null ) {
+                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite)
+                activityDetailBinding.fabAddToFav.setOnClickListener {
+                    roomViewModel.delete(a_user)
+                    Toast.makeText(this, "Berhasil dihapus dari daftar favorit", Toast.LENGTH_SHORT).show()
+                    activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite_bordered)
+                }
+            } else {
+                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite_bordered)
+                activityDetailBinding.fabAddToFav.setOnClickListener {
+                    val userFav = UserFav(username, avatarUrl)
+                    roomViewModel.insert(userFav)
                     activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite)
+                    Toast.makeText(this, "Berhasil ditambahkan ke daftar favorit", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -71,18 +86,6 @@ class DetailActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
-        activityDetailBinding.fabAddToFav.setOnClickListener {
-            val userFav = UserFav()
-            userFav.let { userFavorite ->
-                userFavorite.avatarUrl = user!!.photo
-                userFavorite.username = user.username
-                userFavorite.isFavorite = true
-                roomViewModel.insert(userFav)
-
-                activityDetailBinding.fabAddToFav.setImageResource(R.drawable.ic_favorite)
-                Toast.makeText(this, "Berhasil ditambahkan ke daftar favorit", Toast.LENGTH_SHORT).show()
-            }
-        }
         supportActionBar?.elevation = 0f
     }
 
@@ -106,7 +109,7 @@ class DetailActivity : AppCompatActivity() {
         activityDetailBinding.tvFollowingCount.text = user.following.toString()
     }
 
-    private fun getUserDetail(): User? {
+    private fun getParceableData(): User? {
         if (Build.VERSION.SDK_INT >= 33) {
             return intent.getParcelableExtra(EXTRA_USER, User::class.java)
         } else {

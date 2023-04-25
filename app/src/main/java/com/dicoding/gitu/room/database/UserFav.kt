@@ -5,10 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
-/*
-* Kelas ini utk menentukan atribut-atribut tabel
-* Tabel ini dibuat dengan annotation @Entity dan diimplementasikan Parceable juga
-* */
 @Entity
 @Parcelize
 data class UserFav (
