@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.gitu.databinding.ActivityMainBinding
 import com.dicoding.gitu.helper.SettingPreference
-import com.dicoding.gitu.helper.ViewModelFactory
+import com.dicoding.gitu.helper.SViewModelFactory
 import com.dicoding.gitu.menu.SettingActivity
 import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.user.User
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Github User"
 
         val pref = SettingPreference.getInstance(dataStore)
-        val settingViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(SettingViewModel::class.java)
+        val settingViewModel = ViewModelProvider(this, SViewModelFactory(pref)).get(SettingViewModel::class.java)
         settingViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
