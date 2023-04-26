@@ -30,7 +30,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class MainActivity : AppCompatActivity() {
     private lateinit var activityMainBinding: ActivityMainBinding
     private val viewModel: MainViewModel by lazy {
-       ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MainViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = "Github User"
 
         val pref = SettingPreference.getInstance(dataStore)
-        val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(SettingViewModel::class.java)
+        val settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref))[SettingViewModel::class.java]
         settingViewModel.getThemeSetting().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         activityMainBinding.rvUsers.layoutManager = LinearLayoutManager(this)
-        viewModel.listUser.observe(this, { items -> setUserData(items) })
-        viewModel.isLoading.observe(this, { showLoading(it) })
+        viewModel.listUser.observe(this) { items -> setUserData(items) }
+        viewModel.isLoading.observe(this) { showLoading(it) }
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = activityMainBinding.searchField
@@ -79,18 +79,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.menu_favorite -> {
                 val intent = Intent(this, FavoriteActivity::class.java)
                 startActivity(intent)
-                return true
+                true
             }
+
             R.id.menu_setting -> {
                 val intent = Intent(this, SettingActivity::class.java)
                 startActivity(intent)
-                return true
+                true
             }
-            else -> return true
+
+            else -> true
         }
     }
 

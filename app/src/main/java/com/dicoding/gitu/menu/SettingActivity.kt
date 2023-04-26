@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.RelativeSizeSpan
 import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat

@@ -1,6 +1,5 @@
 package com.dicoding.gitu.follows
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.gitu.DetailActivity
 import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.api.ApiConfig
 import com.dicoding.gitu.databinding.FragmentFollowsBinding
-import com.dicoding.gitu.user.User
 import com.dicoding.gitu.viewModel.DetailViewModel
 
 class FollowsFragment : Fragment() {
@@ -58,6 +55,7 @@ class FollowsFragment : Fragment() {
     }
 
     private fun setUsers(users: List<Items>) {
+        /*
         val list = ArrayList<User>()
         for (user in users) {
             val userData = User(user.avatarUrl.toString(), user.login.toString())
@@ -65,7 +63,8 @@ class FollowsFragment : Fragment() {
         }
         val listUser = UserFollowsAdapter(list)
         binding.rvFollowsList.adapter = listUser
-
+        /*
+         */
         listUser.setOnUserListDetailClickCallback(object : UserFollowsAdapter.OnUserListDetailClickCallback {
             override fun onUserClicked(u: User) {
                 val userDetail = User(u.photo, u.username)
@@ -74,6 +73,7 @@ class FollowsFragment : Fragment() {
                 startActivity(toDetail)
             }
         })
+        */
     }
 
     private fun showLoading(isLoading: Boolean) {

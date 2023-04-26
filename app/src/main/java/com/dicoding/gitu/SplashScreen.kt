@@ -1,11 +1,13 @@
 package com.dicoding.gitu
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreen: AppCompatActivity() {
     private val SPLASH_SCREEN_TIMEOUT: Long = 1500
 
