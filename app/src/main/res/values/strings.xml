@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">GitU</string>
-    <string name="count_item">Results</string>
     <string name="user_username">Username</string>
     <string name="user_user_name">Name</string>
     <string name="user_avatar">Avatar</string>
@@ -17,10 +16,5 @@
 
     <string name="fab_addfavs">Add to favorite</string>
     <string name="dark_mode">Dark Mode</string>
-    <string name="cancel">Batalkan</string>
-    <string name="message_cancel">Anda akan menghapus dari daftar favorit</string>
-    <string name="message_delete">Anda sudah menghapus dari daftar favorit</string>
-    <string name="delete">Hapus</string>
-    <string name="yes">Ya</string>
-    <string name="no">No</string>
+    <string name="logo">Logo</string>
 </resources>

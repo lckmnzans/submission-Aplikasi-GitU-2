@@ -55,10 +55,12 @@ class DetailActivity : AppCompatActivity() {
         if (user != null) {
             username = user.username
             avatarUrl = user.photo
-            sectionsPageAdapter = SectionsPageAdapter(this, user.username)
             DetailViewModel.username = user.username
-            detailViewModel.userDetail.observe(this) { userDetail -> setUserDetail(userDetail) }
+            detailViewModel.userDetail.observe(this) { userDetail ->
+                setUserDetail(userDetail)
+            }
             detailViewModel.isLoading.observe(this) { showLoading(it) }
+            sectionsPageAdapter = SectionsPageAdapter(this, user.username)
         }
         roomViewModel.getByUsername(username).observe(this) { a_user ->
             if ( a_user != null ) {

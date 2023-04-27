@@ -9,7 +9,7 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="@android:style/Widget.Holo.Light.ProgressBar.Large"
+        style="@android:style/Widget.Holo.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -95,7 +95,6 @@
             app:layout_constraintEnd_toEndOf="parent"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/follows_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -108,11 +107,12 @@
             android:background="?attr/colorPrimary"
             android:contentDescription="@string/content_tab"
             app:tabIndicatorHeight="5dp"
-            app:tabTextColor="@android:color/white" />
+            app:tabTextColor="@android:color/white"/>
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:paddingBottom="300dp"/>
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

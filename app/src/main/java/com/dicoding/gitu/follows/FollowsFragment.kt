@@ -1,5 +1,6 @@
 package com.dicoding.gitu.follows
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.gitu.DetailActivity
 import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.api.ApiConfig
 import com.dicoding.gitu.databinding.FragmentFollowsBinding
+import com.dicoding.gitu.user.User
 import com.dicoding.gitu.viewModel.DetailViewModel
 
 class FollowsFragment : Fragment() {
@@ -31,10 +34,22 @@ class FollowsFragment : Fragment() {
 
         binding.rvFollowsList.layoutManager = LinearLayoutManager(requireContext())
         if (position == 1) {
-            viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(username, "followers"))
+            viewModel.userFollowers.observe(viewLifecycleOwner) { followers ->
+                viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(
+                    username,
+                    "followers",
+                    followers
+                ))
+            }
             viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         } else {
-            viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(username, "following"))
+            viewModel.userFollowing.observe(viewLifecycleOwner) { following ->
+                viewModel.getUserFollowsDetail(ApiConfig.getApiService().getListOfFollows(
+                    username,
+                    "following",
+                    following
+                ))
+            }
             viewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         }
         viewModel.userFollowsList.observe(viewLifecycleOwner) { users -> setUsers(users) }
@@ -44,7 +59,7 @@ class FollowsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFollowsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,7 +70,6 @@ class FollowsFragment : Fragment() {
     }
 
     private fun setUsers(users: List<Items>) {
-        /*
         val list = ArrayList<User>()
         for (user in users) {
             val userData = User(user.avatarUrl.toString(), user.login.toString())
@@ -63,8 +77,7 @@ class FollowsFragment : Fragment() {
         }
         val listUser = UserFollowsAdapter(list)
         binding.rvFollowsList.adapter = listUser
-        /*
-         */
+
         listUser.setOnUserListDetailClickCallback(object : UserFollowsAdapter.OnUserListDetailClickCallback {
             override fun onUserClicked(u: User) {
                 val userDetail = User(u.photo, u.username)
@@ -73,7 +86,6 @@ class FollowsFragment : Fragment() {
                 startActivity(toDetail)
             }
         })
-        */
     }
 
     private fun showLoading(isLoading: Boolean) {

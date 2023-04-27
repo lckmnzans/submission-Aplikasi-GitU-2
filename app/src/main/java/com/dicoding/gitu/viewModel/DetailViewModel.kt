@@ -4,10 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.dicoding.gitu.api.ApiConfig
 import com.dicoding.gitu.response.Items
 import com.dicoding.gitu.response.UserDetailResponse
-import com.dicoding.gitu.api.ApiConfig
-import kotlinx.coroutines.delay
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,6 +20,12 @@ class DetailViewModel: ViewModel() {
 
     private val _userFollowsList = MutableLiveData<List<Items>>()
     val userFollowsList: LiveData<List<Items>> = _userFollowsList
+
+    private val _userFollowers = MutableLiveData<String>()
+    val userFollowers: LiveData<String> = _userFollowers
+
+    private val _userFollowing = MutableLiveData<String>()
+    val userFollowing: LiveData<String> = _userFollowing
 
     companion object {
         private const val TAG = "DetailActivity"
@@ -40,6 +45,8 @@ class DetailViewModel: ViewModel() {
                     val responseBody = response.body()
                     if (responseBody != null) {
                         _userDetail.value = responseBody
+                        _userFollowers.value = responseBody.followers.toString()
+                        _userFollowing.value = responseBody.following.toString()
                     } else {
                         Log.e(TAG, "onFailure: ${response.message()}")
                     }

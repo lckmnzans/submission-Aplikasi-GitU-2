@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 
-@SuppressLint("CustomSplashScreen")
 class SplashScreen: AppCompatActivity() {
     private val SPLASH_SCREEN_TIMEOUT: Long = 1500
 
