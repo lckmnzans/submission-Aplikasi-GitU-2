@@ -16,7 +16,10 @@ Fitur-fitur yang diterapkan di aplikasi:
 - Menampilkan detail user ketika salah satu item di-klik dari MainActivity
 - Menampilkan tabs followers dan following di DetailActivity dengan penerapan Tabs serta ViewPager2
 - Menggunakan fragment serta RecyclerView untuk menampilkan list followers dan following
-- Menambahkan fitur penambahan dan penghapusan user ke atau dari daftar favorit
+- Menambahkan fitur penambahan dan penghapusan user ke atau dari daftar favorit dengan Room
 - Menambahkan fitur pengubahan tema dengan menerapkan SharedPreferences
 ---
-Untuk menggunakan proyek ini, tambahkan Github Token di file interface ApiService pada annotation @Header
+Untuk menggunakan proyek ini, tambahkan Github Token pada file interface ApiService, ganti underscore dengan token yang ada.
+
+![image](https://user-images.githubusercontent.com/120755286/234795281-896b7a04-a644-4bd1-8477-2ebc3eaad63d.png)
+
